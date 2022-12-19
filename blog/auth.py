@@ -23,7 +23,11 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
-
+            
+        # check first char in username
+        elif not (username[0].isupper()):
+            error = 'Username should be capitalized.'
+            
         if error is None:
             try:
                 db.execute(
@@ -82,6 +86,7 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 # Require Authentication in Other Views
 def login_required(view):
